@@ -1,5 +1,6 @@
-class TodosController < ApplicationController
+# frozen_string_literal: true
 
+class TodosController < ApplicationController
   def new
     @todo = Todo.new
   end
@@ -7,11 +8,16 @@ class TodosController < ApplicationController
   def create
     @todo = Todo.create(todo_params)
     if @todo.save
+      flash[:notice] = 'Todo was created succesfully!'
       redirect_to todo_path(@todo)
     else
       render 'new'
-    end    
-  end 
+    end
+  end
+
+  def show
+    @todo = Todo.find(params[:id])
+  end
 
   private
 
