@@ -8,7 +8,7 @@ class TodosController < ApplicationController
   def create
     @todo = Todo.create(todo_params)
     if @todo.save
-      flash[:notice] = 'Todo was created succesfully!'
+      flash[:notice] = 'Todo was created successfully!'
       redirect_to todo_path(@todo)
     else
       render 'new'
@@ -27,7 +27,7 @@ class TodosController < ApplicationController
     @todo = Todo.find(params[:id])
 
     if @todo.update(todo_params)
-      flash[:notice] = 'todo was succesdfully udpated'
+      flash[:notice] = 'todo was udpated successfully'
       redirect_to todo_path(@todo)
     else
       render 'edit'
@@ -36,6 +36,13 @@ class TodosController < ApplicationController
 
   def index
     @todos = Todo.all
+  end
+
+  def destroy
+    @todo = Todo.find(params[:id])
+    @todo.destroy
+    flash[:notice] = 'todo was deleted successfully'
+    redirect_to todos_path
   end
 
   private
